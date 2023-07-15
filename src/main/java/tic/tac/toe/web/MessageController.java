@@ -23,12 +23,14 @@ public class MessageController {
 
     @MessageMapping("/make-move")
     public void makeMove(MakeMoveRequest request) {
+        String coordinates = request.getCoordinates();
+        Integer numberCoordinate = Integer.valueOf(String.valueOf(coordinates.charAt(1)));
+        Character letterCoordinate = coordinates.charAt(0);
         int coordinate1 = -1;
-        String letterCoordinate = request.getLetterCoordinate();
-        if (letterCoordinate.equals("A")) coordinate1 = 0;
-        if (letterCoordinate.equals("B")) coordinate1 = 1;
-        if (letterCoordinate.equals("C")) coordinate1 = 2;
-        GameDto gameDto = gameService.makeMove(request.getGameId(),coordinate1, Integer.parseInt(request.getNumberCoordinate()) - 1);
+        if (letterCoordinate.equals('A')) coordinate1 = 0;
+        if (letterCoordinate.equals('B')) coordinate1 = 1;
+        if (letterCoordinate.equals('C')) coordinate1 = 2;
+        GameDto gameDto = gameService.makeMove(request.getGameId(),coordinate1, numberCoordinate - 1);
         messagingTemplate.convertAndSend("/game2/games/" + request.getGameId(), gameDto);
     }
 

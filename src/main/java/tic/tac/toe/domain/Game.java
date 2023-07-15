@@ -1,6 +1,6 @@
 package tic.tac.toe.domain;
 
-import tic.tac.toe.GameException;
+import tic.tac.toe.exception.GameException;
 import tic.tac.toe.dto.GameDto;
 
 import java.util.Arrays;
@@ -52,11 +52,9 @@ public class Game {
 
     private void checkIfMoveIsCorrect(int charCoordinate, int numberCoordinate) {
         if (charCoordinate < 0 || charCoordinate > 2 || numberCoordinate < 0 || numberCoordinate > 2) {
-            throw GameException.wrongCoordinates("Wrong coordinates!");
-            //System.out.println("Incorrect coordinates!");
+            throw GameException.wrongCoordinates("Wrong coordinates!", id);
         } else if (field[charCoordinate][numberCoordinate] != Sign.N) {
-            throw GameException.thatMoveAlreadyBeenMade("That move already been made!");
-            //System.out.println("That move already been made;");
+            throw GameException.thatMoveAlreadyBeenMade("That move already been made!", id);
         }
     }
 
