@@ -9,6 +9,10 @@ import tic.tac.toe.dto.GetGameRequest;
 import tic.tac.toe.dto.MakeMoveRequest;
 import tic.tac.toe.service.GameService;
 
+/**
+ * Controller class that handles WebSocket message-based communication.
+ * Exposes message mapping endpoints for making moves and retrieving game status.
+ */
 @Controller
 public class MessageController {
 
@@ -21,6 +25,13 @@ public class MessageController {
         this.messagingTemplate = messagingTemplate;
     }
 
+    /**
+     * Handles the WebSocket message mapping for making a move in the game.
+     * Converts the request coordinates and delegates to the GameService to make the move.
+     * Sends the updated game data to the appropriate WebSocket destination.
+     *
+     * @param request the MakeMoveRequest containing the game identifier and move coordinates
+     */
     @MessageMapping("/make-move")
     public void makeMove(MakeMoveRequest request) {
         String coordinates = request.getCoordinates();
@@ -34,6 +45,12 @@ public class MessageController {
         messagingTemplate.convertAndSend("/game2/games/" + request.getGameId(), gameDto);
     }
 
+    /**
+     * Handles the WebSocket message mapping for retrieving the game status.
+     * Delegates to the GameService to get the game data and sends it to the appropriate WebSocket destination.
+     *
+     * @param request the GetGameRequest containing the game identifier
+     */
     @MessageMapping("/game-status")
     public void getGame(GetGameRequest request) {
         GameDto gameDto = gameService.getGame(request.getGameId());

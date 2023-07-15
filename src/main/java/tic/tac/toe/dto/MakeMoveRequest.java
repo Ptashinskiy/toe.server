@@ -1,5 +1,9 @@
 package tic.tac.toe.dto;
 
+/**
+ * Data Transfer Object (DTO) class representing a request to make a move in the game.
+ * The class encapsulates the game identifier and the coordinates of the move.
+ */
 public class MakeMoveRequest {
 
     private String gameId;

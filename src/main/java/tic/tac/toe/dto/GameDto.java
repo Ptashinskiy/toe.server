@@ -3,6 +3,10 @@ package tic.tac.toe.dto;
 import tic.tac.toe.domain.GameStatus;
 import tic.tac.toe.domain.Sign;
 
+/**
+ * Data Transfer Object (DTO) class representing game data for communication.
+ * The class encapsulates the game's identifier, field, status, and winner.
+ */
 public class GameDto {
 
     private String id;
